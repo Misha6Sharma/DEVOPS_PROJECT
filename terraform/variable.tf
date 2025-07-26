@@ -19,7 +19,7 @@ variable "key_pair" {
 variable "public_key_path" {
   description = "Path to the public key on your machine"
   type        = string
-  default     = "C:/Users/misha/.ssh/id_ed25519.pub"
+  default     = "C:\Users\misha\.ssh\id_ed25519.pub"
 }
 
 variable "ami_id" {
