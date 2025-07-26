@@ -42,4 +42,5 @@ variable "vpc_id" {
 variable "subnet_id" {
   description = "Subnet ID where EC2 will be launched"
   type        = string
+  default = "subnet-06a48cd785d719de8"
 }
