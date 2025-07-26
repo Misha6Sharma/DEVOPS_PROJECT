@@ -10,11 +10,7 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
-variable "key_pair" {
-  description = "Name of the Key Pair in AWS"
-  type        = string
-  default     = "final_project_key2"
-}
+
 
 variable "public_key_path" {
   description = "Path to the public key on your machine"
