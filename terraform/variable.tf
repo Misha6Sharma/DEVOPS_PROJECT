@@ -37,6 +37,7 @@ variable "cidr_block" {
 variable "vpc_id" {
   description = "The ID of the VPC"
   type        = string
+  default="vpc-04f00a74d9069f880"
 }
 
 variable "subnet_id" {
