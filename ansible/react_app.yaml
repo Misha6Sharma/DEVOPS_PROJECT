@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: Deploy and serve React app
+  hosts: all
   become: yes
 
   tasks:
@@ -10,13 +11,14 @@
       apt:
         name: "{{ item }}"
         state: present
+        update_cache: yes
       loop:
         - nodejs
         - npm
 
     - name: Clone React app repo
       git:
-        repo: 'https://github.com/Misha6Sharma/DEVOPS_PROJECT.git'
+        repo: 'https://github.com/deshraj-techhub/aws-devops-handson.git'
         dest: /home/ubuntu/react-app
 
     - name: Install app dependencies

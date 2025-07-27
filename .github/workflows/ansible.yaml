@@ -1,7 +1,10 @@
 name: Ansible React Deployment
 
 on:
-  workflow_dispatch:  # You manually trigger this when needed
+  workflow_run:
+    workflows: ["Terraform CI/CD"]  
+    types:
+      - completed
 
 jobs:
   deploy:
