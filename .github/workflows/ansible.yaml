@@ -26,9 +26,10 @@ jobs:
 
       - name: Create Ansible inventory
         run: |
-          echo "[web]" > inventory.ini
-          echo "${{ secrets.EC2_PUBLIC_IP }} ansible_user=ubuntu ansible_ssh_private_key_file=key.pem" >> inventory.ini
-
+          cat <<EOF > inventory.ini
+          [web]
+          ${{ secrets.EC2_PUBLIC_IP }} ansible_user=ubuntu ansible_ssh_private_key_file=key.pem
+          EOF
       - name: Run Ansible Playbook
         run: |
           ansible-playbook -i inventory.ini ansible/react_app.yaml
