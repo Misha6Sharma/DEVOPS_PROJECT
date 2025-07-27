@@ -1,0 +1,39 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Add NodeSource APT repo
+      shell: curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+
+    - name: Install Node.js and npm
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - nodejs
+        - npm
+
+    - name: Clone React app repo
+      git:
+        repo: 'https://github.com/Misha6Sharma/DEVOPS_PROJECT.git'
+        dest: /home/ubuntu/react-app
+
+    - name: Install app dependencies
+      npm:
+        path: /home/ubuntu/react-app
+
+    - name: Install 'serve' globally
+      npm:
+        name: serve
+        global: yes
+
+    - name: Build React app
+      shell: npm run build
+      args:
+        chdir: /home/ubuntu/react-app
+
+    - name: Serve the app
+      shell: nohup npx serve -s build -l 3000 &
+      args:
+        chdir: /home/ubuntu/react-app

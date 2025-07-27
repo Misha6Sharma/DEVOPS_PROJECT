@@ -1,0 +1,32 @@
+name: Ansible React Deployment
+
+on:
+  workflow_dispatch:  # You manually trigger this when needed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
+
+      - name: Setup SSH Key
+        run: |
+          echo "${{ secrets.EC2_PRIVATE_KEY }}" > key.pem
+          chmod 600 key.pem
+
+      - name: Create Ansible inventory
+        run: |
+          echo "[web]" > inventory.ini
+          echo "${{ secrets.EC2_PUBLIC_IP }} ansible_user=ubuntu ansible_ssh_private_key_file=key.pem" >> inventory.ini
+
+      - name: Run Ansible Playbook
+        run: |
+          ansible-playbook -i inventory.ini react_app.yaml
+
