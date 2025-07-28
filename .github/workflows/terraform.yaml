@@ -23,4 +23,39 @@ jobs:
         run: cd terraform && terraform init
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ap-south-1
+
+      - name: Terraform Validate
+        run: cd terraform && terraform validate
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ap-south-1
+
+      - name: Terraform Plan
+        run: cd terraform && terraform plan
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ap-south-1
+
+      - name: Terraform Apply
+        run: cd terraform && terraform apply -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ap-south-1
+
+      - name: Get EC2 Public IP and Save to File
+        run: |
+          cd terraform
+          EC2_PUBLIC_IP=$(terraform output -raw public_ip)
+          echo "$EC2_PUBLIC_IP" > ec2-ip.txt
+          echo "EC2_PUBLIC_IP=$EC2_PUBLIC_IP" >> $GITHUB_ENV
+
+      - name: Upload EC2 IP as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ec2-ip
+          path: terraform/ec2-ip.txt
