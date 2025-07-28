@@ -51,3 +51,8 @@ jobs:
          cd terraform
          EC2_PUBLIC_IP=$(terraform output -raw public_ip | head -1)
          echo "EC2_PUBLIC_IP=$EC2_PUBLIC_IP" >> $GITHUB_ENV
+               - name: Upload EC2 IP Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ec2-ip
+          path: terraform/ec2_ip.txt
