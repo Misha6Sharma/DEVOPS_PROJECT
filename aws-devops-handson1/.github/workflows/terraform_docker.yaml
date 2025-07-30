@@ -1,4 +1,5 @@
 name: Deploy React App to ECS
+# This GitHub Actions workflow builds a Docker image for a React app and deploys it to AWS ECS.
 
 on:
   push:
