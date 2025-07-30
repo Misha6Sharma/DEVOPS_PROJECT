@@ -12,7 +12,7 @@ jobs:
 
     env:
       IMAGE_TAG: latest
-      ECR_REPO: react-app_repo
+      ECR_REPO: react-app-repo
       AWS_REGION: ap-south-1
 
     steps:
