@@ -36,7 +36,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t $ECR_REPO ./aws-devops-handson
+        docker build -t $ECR_REPO ./aws-devops-handson1/aws-devops-handson
         docker tag $ECR_REPO:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/$ECR_REPO:${{ env.IMAGE_TAG }}
 
     - name: Push image to ECR
