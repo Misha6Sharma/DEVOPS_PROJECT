@@ -1,5 +1,5 @@
 
-# This Dockerfile sets up a Node.js environment to build and serve a React application.
+# This Dockerfile sets up a Node.js environment to build and serve a React application
 FROM node:18
 
 WORKDIR /app
