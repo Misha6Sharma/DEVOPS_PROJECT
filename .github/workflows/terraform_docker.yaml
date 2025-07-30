@@ -48,10 +48,11 @@ jobs:
 
     - name: Terraform Init
       run: |
-        cd terraform
+        cd terraform_ecs
         terraform init
 
     - name: Terraform Apply
       run: |
-        cd terraform
+        cd terraform_ecs
         terraform apply -auto-approve
+      
