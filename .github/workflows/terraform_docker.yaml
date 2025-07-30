@@ -12,7 +12,7 @@ jobs:
 
     env:
       IMAGE_TAG: latest
-      ECR_REPO: react-app
+      ECR_REPO: react-app_repo
       AWS_REGION: ap-south-1
 
     steps:
@@ -36,7 +36,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t $ECR_REPO ./react-app
+        docker build -t $ECR_REPO ./react-app-repo
         docker tag $ECR_REPO:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/$ECR_REPO:${{ env.IMAGE_TAG }}
 
     - name: Push image to ECR
